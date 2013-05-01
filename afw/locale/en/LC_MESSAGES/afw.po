@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: afw\n"
-"POT-Creation-Date: 2013-05-01 12:25+0300\n"
-"PO-Revision-Date: 2013-05-01 12:26+0300\n"
+"POT-Creation-Date: 2013-05-01 14:02+0300\n"
+"PO-Revision-Date: 2013-05-01 14:03+0300\n"
 "Last-Translator: Aequiternus <aequiternus@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,18 +16,71 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: tmp/res/locale.php:17
-msgid "Welcome to My PHP Application"
+#: afw/c/Exception.php:40
+msgid "403 Forbidden"
 msgstr ""
 
-#: tmp/res/locale.php:20
-msgid "Have a nice day"
+#: afw/c/Exception.php:43
+msgid "404 Not Found"
 msgstr ""
 
-#: tmp/res/locale.php:23 tmp/res/locale.php:24 tmp/res/locale.php:25
+#: afw/c/Exception.php:50
+msgid "500 Internal Server Error"
+msgstr ""
+
+#: afw/c/FormModel.php:128
 #, php-format
-msgid "%d window"
-msgid_plural "%d windows"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgid "%s created"
+msgstr ""
+
+#: afw/c/FormModel.php:129
+#, php-format
+msgid "Create %s"
+msgstr ""
+
+#: afw/c/FormModel.php:131
+#, php-format
+msgid "Create"
+msgstr ""
+
+#: afw/c/FormModel.php:137
+#, php-format
+msgid "%s saved"
+msgstr ""
+
+#: afw/c/FormModel.php:138
+#, php-format
+msgid "Save %s"
+msgstr ""
+
+#: afw/c/FormModel.php:140
+#, php-format
+msgid "Save"
+msgstr ""
+
+#: afw/c/FormModel.php:146
+#, php-format
+msgid "%s deleted"
+msgstr ""
+
+#: afw/c/FormModel.php:147
+#, php-format
+msgid "Delete %s"
+msgstr ""
+
+#: afw/c/FormModel.php:149
+#, php-format
+msgid "Delete"
+msgstr ""
+
+#: afw/m/Field.php:287
+msgid "Value required"
+msgstr ""
+
+#: afw/m/Field.php:314
+msgid "Wrong value"
+msgstr ""
+
+#: afw/m/Field.php:357
+msgid "Wrong file type"
+msgstr ""
