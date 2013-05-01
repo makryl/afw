@@ -20,15 +20,15 @@ class Submit extends Element
 
 
 
-	function __construct($label = null, $name = null)
-	{
-		parent::__construct($label);
+    function __construct($label = null, $name = null)
+    {
+        parent::__construct($label);
 
         if (!isset($name))
         {
-            $name = '__submit'.++self::$i;
+            $name = '__submit' . ++self::$i;
         }
         $this->name = $name;
-	}
+    }
 
 }

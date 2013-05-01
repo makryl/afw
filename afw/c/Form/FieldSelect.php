@@ -15,30 +15,32 @@ namespace afw\c\Form;
 class FieldSelect extends Field
 {
 
-	public $options;
+    public $options;
     public $padding;
 
 
 
-	function __construct($label = null, $name = null, $options = null, $padding = ' &middot;&nbsp; ')
-	{
-		parent::__construct($label, $name);
-		$this->options = $options;
+    function __construct($label = null, $name = null, $options = null, $padding = ' &middot;&nbsp; ')
+    {
+        parent::__construct($label, $name);
+        $this->options = $options;
         $this->padding = $padding;
-	}
+    }
 
 
 
-	function render()
-	{
-		if (isset($this->options) && is_callable($this->options))
-		{
-			$options = $this->options;
-			$this->options = $options();
-		}
-		$this->options = (array)$this->options;
-		parent::render();
-	}
+    function render()
+    {
+        if (isset($this->options) && is_callable($this->options))
+        {
+            $options = $this->options;
+            $this->options = $options();
+        }
+        $this->options = (array)$this->options;
+        parent::render();
+    }
+
+
 
     function renderOption($i, $v, $deep = 0)
     {
@@ -56,7 +58,7 @@ class FieldSelect extends Field
         {
             echo '<option value="', htmlspecialchars($i), '"',
                 (string)$i == (string)$this->value ? ' selected="selected"' : ''
-                ,'>',
+                , '>',
                 str_repeat($this->padding, $deep),
                 $v, '</option>';
         }

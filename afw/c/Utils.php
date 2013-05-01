@@ -19,22 +19,22 @@ class Utils
     {
         $params = $model->getField($fieldImage)->fileParams()->export();
 
-		$max_i = null;
-		$max_w = 0;
-		foreach ($params as $i=>$p)
-		{
-			if (empty($p[\afw\File::IMAGE_WIDTH]) || empty($p[\afw\File::IMAGE_HEIGHT]))
-			{
-				$max_i = $i;
-				break;
-			}
+        $max_i = null;
+        $max_w = 0;
+        foreach ($params as $i => $p)
+        {
+            if (empty($p[\afw\File::IMAGE_WIDTH]) || empty($p[\afw\File::IMAGE_HEIGHT]))
+            {
+                $max_i = $i;
+                break;
+            }
 
-			if ($p[\afw\File::IMAGE_WIDTH] > $max_w)
-			{
-				$max_w = $p[\afw\File::IMAGE_WIDTH];
-				$max_i = $i;
-			}
-		}
+            if ($p[\afw\File::IMAGE_WIDTH] > $max_w)
+            {
+                $max_w = $p[\afw\File::IMAGE_WIDTH];
+                $max_i = $i;
+            }
+        }
         unset($params[$max_i]);
 
         $r = $model->db()

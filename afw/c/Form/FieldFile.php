@@ -15,17 +15,17 @@ namespace afw\c\Form;
 class FieldFile extends Field
 {
 
-	public $labelDelete;
-	public $maxFileSize;
-	public $src;
+    public $labelDelete;
+    public $maxFileSize;
+    public $src;
 
 
 
-	function __construct($label = null, $name = null, $labelDelete = null, $maxFileSize = null)
-	{
-		parent::__construct($label, $name);
-		$this->labelDelete = $labelDelete;
-		$this->maxFileSize = $maxFileSize;
-	}
+    function __construct($label = null, $name = null, $labelDelete = null, $maxFileSize = null)
+    {
+        parent::__construct($label, $name);
+        $this->labelDelete = $labelDelete;
+        $this->maxFileSize = $maxFileSize;
+    }
 
 }

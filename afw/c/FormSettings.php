@@ -15,21 +15,21 @@ namespace afw\c;
 class FormSettings extends FormModelWithFields
 {
 
-	/**
-	 * @return FormSettings
-	 */
-	static function save(\afw\m\Settings $settings,
+    /**
+     * @return FormSettings
+     */
+    static function save(\afw\m\Settings $settings,
         $completeMessage, $headLabel = null, $pushFields = null, $buttonLabel = null)
-	{
-		$c = new static($completeMessage, $settings);
-		$c->setData($_POST);
-		$c->setDefault($settings->all());
+    {
+        $c = new static($completeMessage, $settings);
+        $c->setData($_POST);
+        $c->setDefault($settings->all());
         $c->run(function() use ($settings)
         {
             $settings->save($_POST);
         });
         $c->pushElements($headLabel, $pushFields, $buttonLabel);
-		return $c;
-	}
+        return $c;
+    }
 
 }

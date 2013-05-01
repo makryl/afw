@@ -104,7 +104,7 @@ abstract class ParserModel extends ParserList
         }
         catch (\afw\m\ModelFilterException $e)
         {
-            foreach ($e->getExceptions() as $exception);
+            foreach ($e->getExceptions() as $exception)
             {
                 $this->exceptions[$this->url][] = $exception;
             }

@@ -15,25 +15,25 @@ namespace afw\c\Form;
 class FieldDate extends Field
 {
 
-	protected $format;
+    protected $format;
 
 
 
-	function __construct($label = null, $name = null, $format = null)
-	{
-		parent::__construct($label, $name);
-		$this->format = $format;
-	}
+    function __construct($label = null, $name = null, $format = null)
+    {
+        parent::__construct($label, $name);
+        $this->format = $format;
+    }
 
 
 
-	function render()
-	{
-		if (isset($this->format))
-		{
-			$this->value = date($this->format, strtotime($this->form->getValue($this->name)));
-		}
-		parent::render();
-	}
+    function render()
+    {
+        if (isset($this->format))
+        {
+            $this->value = date($this->format, strtotime($this->form->getValue($this->name)));
+        }
+        parent::render();
+    }
 
 }

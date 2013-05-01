@@ -37,6 +37,7 @@ class Parser
     }
 
 
+
     function load($url)
     {
         $this->preload();

@@ -15,16 +15,16 @@ namespace afw\m;
 class Settings extends ModelWithFields
 {
 
-	const cacheData = 'afw\m\Settings::data';
+    const cacheData = 'afw\m\Settings::data';
 
-	protected $file;
-	protected $data;
+    protected $file;
+    protected $data;
 
 
 
-	function __construct($file, \afw\ICache $cache = null)
-	{
-		$this->file = $file;
+    function __construct($file, \afw\ICache $cache = null)
+    {
+        $this->file = $file;
         $this->setCache($cache);
 
         if (isset($this->cache))
@@ -37,17 +37,17 @@ class Settings extends ModelWithFields
             $this->data = @unserialize(file_get_contents($file));
             $this->cache();
         }
-	}
+    }
 
 
 
-	function save(array $rawValues)
-	{
+    function save(array $rawValues)
+    {
         $newValues = $this->filterValues($rawValues);
-		file_put_contents($this->file, serialize($newValues));
-		$this->data = $newValues;
+        file_put_contents($this->file, serialize($newValues));
+        $this->data = $newValues;
         $this->cache();
-	}
+    }
 
 
 
@@ -62,20 +62,20 @@ class Settings extends ModelWithFields
 
 
     function get($name)
-	{
-		return @$this->data[$name];
-	}
+    {
+        return @$this->data[$name];
+    }
 
 
 
-	function all()
-	{
-		$settings = [];
-		foreach ($this->fields as $name => $field)
-		{
-			$settings[$name] = @$this->data[$name];
-		}
-		return $settings;
-	}
+    function all()
+    {
+        $settings = [];
+        foreach ($this->fields as $name => $field)
+        {
+            $settings[$name] = @$this->data[$name];
+        }
+        return $settings;
+    }
 
 }

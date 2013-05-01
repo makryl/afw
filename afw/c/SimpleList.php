@@ -23,16 +23,14 @@ class SimpleList extends Controller
     {
         parent::__construct();
         $this->setTemplate($__METHOD__);
-        $this->items =& $items;
+        $this->items = & $items;
     }
 
 
 
     function getItems()
     {
-        return empty($this->items)
-            ? []
-            : $this->items;
+        return empty($this->items) ? [] : $this->items;
     }
 
 

@@ -28,6 +28,7 @@ class APDO extends PDO
      * @var ILog
      */
     private $log;
+
     /**
      * @var ICache
      */
@@ -36,37 +37,37 @@ class APDO extends PDO
     private $queryCount;
     private $cachedCount;
 
-    private $nothing        = false;
+    private $nothing = false;
     private $table;
-    private $pkey           = self::DEFAULT_PKEY_NAME;
+    private $pkey = self::DEFAULT_PKEY_NAME;
     private $where;
     private $groupby;
     private $having;
     private $orderby;
     private $limit;
-    private $offset         = 0;
-    private $fields         = '*';
-    private $args           = [];
-    private $callbacks      = [];
+    private $offset = 0;
+    private $fields = '*';
+    private $args = [];
+    private $callbacks = [];
 
     private $lastCache;
     private $lastTable;
     private $lastWhere;
     private $lastArgs;
-	private $lastLimit;
-	private $lastOffset;
+    private $lastLimit;
+    private $lastOffset;
 
     private $lastRowCount;
     private $lastQuery;
 
 
 
-    function __construct ($dsn, $username, $password, $options)
+    function __construct($dsn, $username, $password, $options)
     {
-        $this->dsn      = $dsn;
+        $this->dsn = $dsn;
         $this->username = $username;
         $this->password = $password;
-        $this->options  = $options;
+        $this->options = $options;
     }
 
 
@@ -220,17 +221,17 @@ class APDO extends PDO
 
 
 
-	function lastLimit()
-	{
-		return $this->lastLimit;
-	}
+    function lastLimit()
+    {
+        return $this->lastLimit;
+    }
 
 
 
-	function lastOffset()
-	{
-		return $this->lastOffset;
-	}
+    function lastOffset()
+    {
+        return $this->lastOffset;
+    }
 
 
 
@@ -269,17 +270,17 @@ class APDO extends PDO
 
 
 
-	function currLimit()
-	{
-		return $this->limit;
-	}
+    function currLimit()
+    {
+        return $this->limit;
+    }
 
 
 
-	function currOffset()
-	{
-		return $this->offset;
-	}
+    function currOffset()
+    {
+        return $this->offset;
+    }
 
 
 
@@ -380,26 +381,26 @@ class APDO extends PDO
 
     function reset()
     {
-        $this->lastCache    = $this->cache;
-        $this->lastTable    = $this->table;
-        $this->lastWhere    = $this->where;
-        $this->lastArgs     = $this->args;
-        $this->lastLimit    = $this->limit;
-        $this->lastOffset   = $this->offset;
+        $this->lastCache = $this->cache;
+        $this->lastTable = $this->table;
+        $this->lastWhere = $this->where;
+        $this->lastArgs = $this->args;
+        $this->lastLimit = $this->limit;
+        $this->lastOffset = $this->offset;
 
-        $this->cache        = null;
-        $this->nothing      = false;
-        $this->table        = null;
-        $this->pkey         = self::DEFAULT_PKEY_NAME;
-        $this->where        = null;
-        $this->groupby      = null;
-        $this->having       = null;
-        $this->orderby      = null;
-        $this->limit        = null;
-        $this->offset       = 0;
-        $this->fields       = '*';
-        $this->args         = [];
-        $this->callbacks    = [];
+        $this->cache = null;
+        $this->nothing = false;
+        $this->table = null;
+        $this->pkey = self::DEFAULT_PKEY_NAME;
+        $this->where = null;
+        $this->groupby = null;
+        $this->having = null;
+        $this->orderby = null;
+        $this->limit = null;
+        $this->offset = 0;
+        $this->fields = '*';
+        $this->args = [];
+        $this->callbacks = [];
     }
 
 
@@ -592,7 +593,7 @@ class APDO extends PDO
 
     function handler($callback)
     {
-        $this->callbacks []= $callback;
+        $this->callbacks [] = $callback;
         return $this;
     }
 
@@ -614,11 +615,11 @@ class APDO extends PDO
     {
         $statement = 'SELECT ' . $this->fields
             . "\nFROM " . $this->table
-            . (!empty($this->where)     ? "\nWHERE "     . $this->where                          : '')
-            . (!empty($this->groupby)   ? "\nGROUP BY "  . $this->groupby                        : '')
-            . (!empty($this->having)    ? "\nHAVING "    . $this->having                         : '')
-            . (!empty($this->orderby)   ? "\nORDER BY "  . $this->orderby                        : '')
-            . (!empty($this->limit)     ? "\nLIMIT "     . $this->offset . ', ' . $this->limit   : '');
+            . (!empty($this->where)     ? "\nWHERE "    . $this->where : '')
+            . (!empty($this->groupby)   ? "\nGROUP BY " . $this->groupby : '')
+            . (!empty($this->having)    ? "\nHAVING "   . $this->having : '')
+            . (!empty($this->orderby)   ? "\nORDER BY " . $this->orderby : '')
+            . (!empty($this->limit)     ? "\nLIMIT "    . $this->offset . ', ' . $this->limit : '');
         return $statement;
     }
 
@@ -629,11 +630,9 @@ class APDO extends PDO
         try
         {
             return $this->handlers(
-                $this->nothing
-                    ? []
-                    : $this
-                        ->limit(1)
-                        ->selectFirst($this->buildSelect(), $this->args, $fetch_style)
+                $this->nothing ? [] : $this
+                    ->limit(1)
+                    ->selectFirst($this->buildSelect(), $this->args, $fetch_style)
             );
         }
         catch (\Exception $e)
@@ -684,6 +683,7 @@ class APDO extends PDO
             ->offset($this->limit * (($page ? : 1) - 1))
             ->all($fetch_style);
     }
+
 
 
     function pageK($page = 1)
@@ -738,7 +738,7 @@ class APDO extends PDO
         {
             foreach ($v as $a)
             {
-                $this->args []= $a;
+                $this->args [] = $a;
             }
         }
 
@@ -746,11 +746,7 @@ class APDO extends PDO
             . implode(',', $names) . ") VALUES\n("
             . implode(
                 "),\n(",
-                array_fill(
-                    0, count($values), implode(
-                        ',', array_fill(0, count($names), '?')
-                    )
-                )
+                array_fill(0, count($values), implode(',', array_fill(0, count($names), '?')))
             ) . ')';
 
         try
@@ -836,7 +832,7 @@ class APDO extends PDO
         {
             $pkey = $this->pkey;
         }
-        foreach ($data as $k=>$v)
+        foreach ($data as $k => $v)
         {
             $isArray = is_int($k);
             break;
@@ -852,7 +848,7 @@ class APDO extends PDO
                 $k = $item[$key];
                 if (isset($k))
                 {
-                    $index[$k] []=& $item;
+                    $index[$k] [] = & $item;
                     if (empty($cached[$k]) && empty($keys[$k]))
                     {
                         $cache = $this->cacheGetRow($k);
@@ -874,7 +870,7 @@ class APDO extends PDO
             $k = $data[$key];
             if (isset($k))
             {
-                $index[$k] []=& $data;
+                $index[$k] [] = & $data;
                 if (empty($cached[$k]) && empty($keys[$k]))
                 {
                     $cache = $this->cacheGetRow($k);
@@ -907,11 +903,11 @@ class APDO extends PDO
                 {
                     foreach ($cached as &$row)
                     {
-                        $r []=& $row;
+                        $r [] = & $row;
                         foreach ($index[$row[$pkey]] as &$item)
                         {
-                            $item[$referenceName] =& $row;
-                            $row[$referrerName] []=& $item;
+                            $item[$referenceName] = & $row;
+                            $row[$referrerName] [] = & $item;
                         }
                         unset($item);
                     }
@@ -921,11 +917,11 @@ class APDO extends PDO
                 {
                     foreach ($result as &$row)
                     {
-                        $r []=& $row;
+                        $r [] = & $row;
                         foreach ($index[$row[$pkey]] as &$item)
                         {
-                            $item[$referenceName] =& $row;
-                            $row[$referrerName] []=& $item;
+                            $item[$referenceName] = & $row;
+                            $row[$referrerName] [] = & $item;
                         }
                         unset($item);
                     }
@@ -957,7 +953,7 @@ class APDO extends PDO
         {
             $pkey = $this->pkey;
         }
-        foreach ($data as $k=>$v)
+        foreach ($data as $k => $v)
         {
             $isArray = is_int($k);
             break;
@@ -968,13 +964,13 @@ class APDO extends PDO
         {
             foreach ($data as &$item)
             {
-                $index[$item[$pkey]] =& $item;
+                $index[$item[$pkey]] = & $item;
             }
             unset($item);
         }
         else
         {
-            $index[$data[$pkey]] =& $data;
+            $index[$data[$pkey]] = & $data;
         }
 
         return $this
@@ -989,10 +985,10 @@ class APDO extends PDO
                 $r = [];
                 foreach ($result as &$row)
                 {
-                    $r []=& $row;
-                    $item =& $index[$row[$key]];
-                    $item[$referrerName] []=& $row;
-                    $row[$referenceName] =& $item;
+                    $r [] = & $row;
+                    $item = & $index[$row[$key]];
+                    $item[$referrerName] [] = & $row;
+                    $row[$referenceName] = & $item;
                 }
                 unset($item);
                 unset($row);
