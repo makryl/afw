@@ -1,0 +1,4 @@
+= AFW Documentation
+== Choose language
+
+[./ru ru] [./en en]
