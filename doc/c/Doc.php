@@ -1,10 +1,10 @@
 <?php
 
-namespace docs\c;
+namespace doc\c;
 
 
 
-class Docs extends Layout
+class Doc extends Layout
 {
 
     /**

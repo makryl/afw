@@ -21,7 +21,7 @@ class Map extends Model
     public $fieldParent = 'parent';
     public $fieldChilds = 'childs';
     public $flatPadding = ' &nbsp; ';
-    
+
     protected $index;
     protected $map;
     protected $simpleMap;

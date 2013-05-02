@@ -48,8 +48,8 @@ class Controller
     {
         $this->setTemplateFile(
             str_replace(
-                [static::DIR_CONTROLLER . '\\', '\\', '::'],
-                [static::DIR_VIEW . '/', '/', '/'],
+                ['\\' . static::DIR_CONTROLLER . '\\', '\\', '::'],
+                ['/' . static::DIR_VIEW . '/', '/', '/'],
                 $class_or_method
             ) . '.php'
         );
