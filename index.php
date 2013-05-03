@@ -17,7 +17,7 @@ $uri->setException(function($e)
         ->wrap(new afw\c\Layout());
 });
 
-$uri->addPattern("`^doc(/\w+)$`", function ($m)
+$uri->addPattern('`^doc(/\w+)$`', function ($m)
 {
     return new doc\c\Doc($m[0]);
 });
