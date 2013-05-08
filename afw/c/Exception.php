@@ -29,7 +29,7 @@ class Exception extends Controller
     {
         parent::__construct();
 
-        $this->setTemplate(__CLASS__);
+        $this->setView(__CLASS__);
         $this->exception = $exception;
 
         if ($exception instanceof HttpException)

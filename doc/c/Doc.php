@@ -16,7 +16,7 @@ class Doc extends Layout
     public function __construct($uri)
     {
         parent::__construct();
-        $this->setTemplate(__CLASS__);
+        $this->setView(__CLASS__);
 
         if (is_dir('afw/' . $uri))
         {
