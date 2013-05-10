@@ -625,32 +625,6 @@ class APDO extends PDO
 
 
 
-    function first($fetch_style = PDO::FETCH_ASSOC)
-    {
-        try
-        {
-            return $this->handlers(
-                $this->nothing ? [] : $this
-                    ->limit(1)
-                    ->selectFirst($this->buildSelect(), $this->args, $fetch_style)
-            );
-        }
-        catch (\Exception $e)
-        {
-            $this->reset();
-            throw $e;
-        }
-    }
-
-
-
-    function firstL()
-    {
-        return $this->first(PDO::FETCH_NUM);
-    }
-
-
-
     function all($fetch_style = PDO::FETCH_ASSOC)
     {
         try
@@ -673,6 +647,23 @@ class APDO extends PDO
     function allK()
     {
         return $this->all(PDO::FETCH_KEY_PAIR);
+    }
+
+
+
+    function first($fetch_style = PDO::FETCH_ASSOC)
+    {
+        $r = $this
+            ->limit(1)
+            ->all($fetch_style);
+        return empty($r) ? null : $r[0];
+    }
+
+
+
+    function firstL()
+    {
+        return $this->first(PDO::FETCH_NUM);
     }
 
 

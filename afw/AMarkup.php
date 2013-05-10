@@ -25,7 +25,7 @@ class AMarkup
 
 
 
-    function __construct($linkMaxLength = 50, $headingDec = 0, $allowable = "=*#!-&|'")
+    function __construct($linkMaxLength = 50, $headingDec = 0, $allowable = '=*#!-&|`')
     {
         $this->linkMaxLength = $linkMaxLength;
         $this->headingDec = $headingDec;
@@ -49,7 +49,7 @@ class AMarkup
         foreach ($lines as $line)
         {
             $this->line = $line;
-            if ($this->current == "'")
+            if ($this->current == "`")
             {
                 $this->precode();
             }
@@ -70,7 +70,7 @@ class AMarkup
                         case '-': $this->descr(); break;
                         case '&': $this->blockquote(); break;
                         case '|': $this->table(); break;
-                        case "'": $this->precode(); break;
+                        case '`': $this->precode(); break;
                         default : $this->plaintext(); break;
                     }
                 }
@@ -346,11 +346,11 @@ class AMarkup
 
     private function precode()
     {
-        if ($this->line == "'''")
+        if ($this->line == '```')
         {
-            if ($this->current != "'")
+            if ($this->current != '`')
             {
-                $this->current = "'";
+                $this->current = '`';
                 $this->line = ' <pre><code>';
             }
             else

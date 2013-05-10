@@ -2,7 +2,7 @@
 
 namespace afw;
 
-require __DIR__ . '/../../../lib/afw/AMarkup.php';
+require __DIR__ . '/../../afw/AMarkup.php';
 
 
 
@@ -63,16 +63,16 @@ multiline
 |  any      more than one   space delibiter
 |  for      table           marckup
 
-'''
+```
 preformatted code
 
 * ignores
 ** any markup
 
-'''
+```
 EOS;
         $html = <<<EOS
-<h1 name="h1name"> Heading 1 </h1>  <h2 name="h2name"> Heading 2 </h2>  <p> Multiline paragraph
+<h1 id="h1name"> Heading 1 </h1>  <h2 id="h2name"> Heading 2 </h2>  <p> Multiline paragraph
 with <a rel="nofollow" href="http://www.autolinks.com">www.autolinks.com</a>
 and <a rel="nofollow" href="http://www.google.com">named links</a>
 and <a href="#h1name">references</a>
