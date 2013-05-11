@@ -204,6 +204,7 @@ pre
     white-space: pre;
     overflow-y: hidden;
     overflow-x: auto;
+    padding: .2em 0;
 }
 
 pre > code

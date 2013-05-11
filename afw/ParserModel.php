@@ -19,8 +19,8 @@ abstract class ParserModel extends ParserList
      * @var m\Model
      */
     public $model;
-    public $ekey = 'eid';
-    public $skey = 'sid';
+    public $ekey = 'eid'; # external primary key
+    public $skey = 'sid'; # source identifier
     public $oldKey = 'old';
     public $updateFiles = true;
     public $exceptions = [];
@@ -102,7 +102,7 @@ abstract class ParserModel extends ParserList
             $this->clearFiles();
             $this->countParsed++;
         }
-        catch (\afw\m\ModelFilterException $e)
+        catch (m\ModelFilterException $e)
         {
             foreach ($e->getExceptions() as $exception)
             {
