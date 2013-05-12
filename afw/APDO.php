@@ -637,7 +637,10 @@ class APDO extends PDO
         }
         catch (\Exception $e)
         {
-            $this->reset();
+            if (isset($this))
+            {
+                $this->reset();
+            }
             throw $e;
         }
     }
@@ -746,7 +749,10 @@ class APDO extends PDO
         }
         catch (\Exception $e)
         {
-            $this->reset();
+            if (isset($this))
+            {
+                $this->reset();
+            }
             throw $e;
         }
 
@@ -775,7 +781,10 @@ class APDO extends PDO
         }
         catch (\Exception $e)
         {
-            $this->reset();
+            if (isset($this))
+            {
+                $this->reset();
+            }
             throw $e;
         }
 
@@ -796,7 +805,10 @@ class APDO extends PDO
         }
         catch (\Exception $e)
         {
-            $this->reset();
+            if (isset($this))
+            {
+                $this->reset();
+            }
             throw $e;
         }
 
