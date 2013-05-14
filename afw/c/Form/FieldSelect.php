@@ -20,7 +20,7 @@ class FieldSelect extends Field
 
 
 
-    function __construct($label = null, $name = null, $options = null, $padding = ' &middot;&nbsp; ')
+    function __construct($label = null, $name = null, $options = null, $padding = ' ·  ')
     {
         parent::__construct($label, $name);
         $this->options = $options;

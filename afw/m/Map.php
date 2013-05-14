@@ -20,7 +20,7 @@ class Map extends Model
     public $fieldDeep = 'deep';
     public $fieldParent = 'parent';
     public $fieldChilds = 'childs';
-    public $flatPadding = ' &nbsp; ';
+    public $flatPadding = '   ';
 
     protected $index;
     protected $map;

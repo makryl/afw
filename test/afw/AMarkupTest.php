@@ -84,8 +84,8 @@ and <code>code</code>
 <a rel="nofollow" href="https://www.google.ru/search?aq=f&amp;oq=example&amp;sugexp=chrome,mod=0&amp;sourceid=chrome&amp;client=ubuntu&amp;channel=cs&amp;ie=UTF-8&amp;q=example">https://www.google.ru/search?aq=f&amp;oq=example&amp;sugex…</a>
 <a rel="nofollow" href="http://www.google.com">http://www.google.com</a>
  <p> quoted «quoted text» text
-&nbsp;— starts with space and dash
-long&nbsp;— dash
+ — starts with space and dash
+long — dash
 middle–dash
 «manual» quotes and © copyright
  <ul><li> unordered list item
