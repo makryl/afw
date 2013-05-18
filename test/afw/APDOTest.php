@@ -152,7 +152,7 @@ class APDOTest extends \PHPUnit_Framework_TestCase
         $r = $this->object
             ->from('apdo_test')
             ->orderBy('id')
-            ->first();
+            ->one();
         $this->assertEquals(
             'SELECT *
 FROM apdo_test
@@ -168,7 +168,7 @@ LIMIT 0, 1', $this->object->lastQuery());
         $r = $this->object
             ->in('apdo_test')
             ->orderBy('id')
-            ->first();
+            ->one();
         $this->assertEquals(
             'SELECT *
 FROM apdo_test
@@ -185,7 +185,7 @@ LIMIT 0, 1', $this->object->lastQuery());
             ->from('apdo_test')
             ->pkey('id')
             ->key(1)
-            ->first();
+            ->one();
         $this->assertEquals(
             'SELECT *
 FROM apdo_test
@@ -202,7 +202,7 @@ LIMIT 0, 1', $this->object->lastQuery());
             ->from('apdo_test A')
             ->join('apdo_test B', 'A.id+1=B.id')
             ->orderBy('A.id')
-            ->first();
+            ->one();
         $this->assertEquals(
             'SELECT *
 FROM apdo_test A
@@ -220,7 +220,7 @@ LIMIT 0, 1',
         $r = $this->object
             ->from('apdo_test')
             ->where('id=?', 2)
-            ->first();
+            ->one();
         $this->assertEquals(
             'SELECT *
 FROM apdo_test
@@ -252,7 +252,7 @@ WHERE (id=?) OR (id=?)', $this->object->lastQuery());
         $r = $this->object
             ->from('apdo_test')
             ->key([2, 3])
-            ->first();
+            ->one();
         $this->assertEquals(
             'SELECT *
 FROM apdo_test
@@ -285,7 +285,7 @@ WHERE (id IN (?,?)) OR (id IN (?,?))', $this->object->lastQuery());
         $r = $this->object
             ->from('apdo_test')
             ->orderBy('id DESC')
-            ->first();
+            ->one();
         $this->assertEquals(
             'SELECT *
 FROM apdo_test
@@ -352,7 +352,7 @@ LIMIT 1, 1', $this->object->lastQuery());
             ->from('apdo_test')
             ->fields(['id', 'id AS id2'])
             ->orderBy('id')
-            ->first();
+            ->one();
         $this->assertEquals(
             'SELECT id, id AS id2
 FROM apdo_test
@@ -368,7 +368,7 @@ LIMIT 0, 1', $this->object->lastQuery());
         $r = $this->object
             ->from('apdo_test')
             ->orderBy('id')
-            ->first();
+            ->one();
         $this->assertEquals(
             'SELECT *
 FROM apdo_test
@@ -384,7 +384,7 @@ LIMIT 0, 1', $this->object->lastQuery());
         $r = $this->object
             ->from('apdo_test')
             ->orderBy('id')
-            ->firstL();
+            ->oneL();
         $this->assertEquals(
             'SELECT *
 FROM apdo_test
@@ -501,7 +501,7 @@ WHERE id=?", $this->object->lastQuery());
         $r = $this->object
             ->from('apdo_test')
             ->key(22)
-            ->first();
+            ->one();
         $this->assertEquals(['id' => 22], $r);
     }
 
@@ -525,7 +525,7 @@ WHERE id=?', $this->object->lastQuery());
         $r = $this->object
             ->from('apdo_test')
             ->key(31)
-            ->first();
+            ->one();
         $this->assertEquals(false, $r);
     }
 

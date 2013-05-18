@@ -654,7 +654,7 @@ class APDO extends PDO
 
 
 
-    function first($fetch_style = PDO::FETCH_ASSOC)
+    function one($fetch_style = PDO::FETCH_ASSOC)
     {
         $r = $this
             ->limit(1)
@@ -664,9 +664,9 @@ class APDO extends PDO
 
 
 
-    function firstL()
+    function oneL()
     {
-        return $this->first(PDO::FETCH_NUM);
+        return $this->one(PDO::FETCH_NUM);
     }
 
 
@@ -682,9 +682,7 @@ class APDO extends PDO
 
     function pageK($page = 1)
     {
-        return $this
-            ->offset($this->limit * (($page ? : 1) - 1))
-            ->allK();
+        return $this->page($page, PDO::FETCH_KEY_PAIR);
     }
 
 

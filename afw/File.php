@@ -467,6 +467,10 @@ class File
                 throw new \Exception(sprintf(self::$IMAGICK_ERR, $r));
             }
             chmod($p[self::DEST], $mode ? : self::$CHMOD);
+            if (self::$UNLINK_RECEIVE_SRC)
+            {
+                unlink($src);
+            }
         }
     }
 

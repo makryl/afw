@@ -131,7 +131,7 @@ class Model extends ModelWithFields
         }
         return $this->db()
             ->key($id, $key)
-            ->first();
+            ->one();
     }
 
 

@@ -81,7 +81,7 @@ abstract class ParserModel extends ParserList
             $old = $this->model->db()
                 ->key($this->item[$this->ekey], $this->ekey)
                 ->key($this->item[$this->skey], $this->skey)
-                ->first();
+                ->one();
 
             if (!empty($old))
             {

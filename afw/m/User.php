@@ -25,7 +25,7 @@ class User extends Model
      */
     protected $supervisor;
     protected $data;
-    
+
     public $fieldName = 'name';
     public $fieldPassword = 'password';
 
@@ -57,7 +57,7 @@ class User extends Model
                 "$this->fieldName=? AND $this->fieldPassword=?",
                 [$values[$this->fieldName], $values[$this->fieldPassword]]
             )
-            ->first();
+            ->one();
 
         Session::set(self::SESSION_DATA, $this->data);
 
