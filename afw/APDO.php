@@ -611,7 +611,7 @@ class APDO extends PDO
 
 
 
-    private function buildSelect()
+    function buildSelect()
     {
         $statement = 'SELECT ' . $this->fields
             . "\nFROM " . $this->table

@@ -46,10 +46,15 @@ class Controller
 
     function setView($class_or_method)
     {
+        $class_or_method = preg_replace(
+            '`(^|\\\\)' . static::DIR_CONTROLLER . '\\\\`',
+            '$1' . self::DIR_VIEW . '/',
+            $class_or_method
+        );
         $this->setViewFile(
             str_replace(
-                ['\\' . static::DIR_CONTROLLER . '\\', '\\', '::'],
-                ['/' . static::DIR_VIEW . '/', '/', '/'],
+                ['\\', '::'],
+                ['/', '/'],
                 $class_or_method
             ) . '.php'
         );
