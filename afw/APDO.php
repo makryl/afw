@@ -14,10 +14,12 @@ use \PDO;
 
 
 
-class APDO extends PDO
+class APDO
 {
 
     const DEFAULT_PKEY_NAME = 'id';
+
+    public $pdo;
 
     private $dsn;
     private $username;
@@ -72,13 +74,21 @@ class APDO extends PDO
 
 
 
-    function connect()
+    /**
+     * @return \PDO
+     */
+    function pdo()
     {
         if (!isset($this->queryCount))
         {
-            parent::__construct($this->dsn, $this->username, $this->password, $this->options);
+            if (!isset($this->options[PDO::ATTR_ERRMODE]))
+            {
+                $this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+            }
+            $this->pdo = new PDO($this->dsn, $this->username, $this->password, $this->options);
             $this->queryCount = 0;
         }
+        return $this->pdo;
     }
 
 
@@ -286,57 +296,16 @@ class APDO extends PDO
 
     function execute($statement, $args = null)
     {
-        $this->connect();
-
-        ++$this->queryCount;
         $this->log($statement, $args);
-        $sth = $this->prepare($statement);
+        $sth = $this->pdo()->prepare($statement);
         $result = $sth->execute((array)$args);
+        ++$this->queryCount;
         $this->lastRowCount = $sth->rowCount();
         $sth->closeCursor();
         $this->lastQuery = $statement;
-
         $this->cacheClear();
 
         return $result;
-    }
-
-
-
-    function selectFirst($statement, $args = null, $fetch_style = PDO::FETCH_ASSOC)
-    {
-        $args = (array)$args;
-
-        $result = $this->cacheGetStatement($statement, $args, $fetch_style);
-        if (isset($result))
-        {
-            ++$this->cachedCount;
-        }
-        else
-        {
-            $this->connect();
-
-            ++$this->queryCount;
-            $this->log($statement, $args);
-            $sth = $this->prepare($statement);
-            $sth->execute($args);
-            $result = $sth->fetch($fetch_style);
-            $sth->closeCursor();
-
-            $this->cacheSetStatement($statement, $args, $fetch_style, $result);
-        }
-
-        $this->lastRowCount = empty($result) ? 0 : 1;
-        $this->lastQuery = $statement;
-
-        return $result;
-    }
-
-
-
-    function selectFirstL($statement, $args = null)
-    {
-        return $this->selectFirst($statement, $args, PDO::FETCH_NUM);
     }
 
 
@@ -352,12 +321,10 @@ class APDO extends PDO
         }
         else
         {
-            $this->connect();
-
-            ++$this->queryCount;
             $this->log($statement, $args);
-            $sth = $this->prepare($statement);
+            $sth = $this->pdo()->prepare($statement);
             $sth->execute($args);
+            ++$this->queryCount;
             $result = $sth->fetchAll($fetch_style);
             $sth->closeCursor();
 
@@ -375,6 +342,21 @@ class APDO extends PDO
     function selectK($statement, $args = null)
     {
         return $this->select($statement, $args, PDO::FETCH_KEY_PAIR);
+    }
+
+
+
+    function selectOne($statement, $args = null, $fetch_style = PDO::FETCH_ASSOC)
+    {
+        $result = $this->select($statement, $args, $fetch_style);
+        return empty($result) ? null : $result[0];
+    }
+
+
+
+    function selectOneL($statement, $args = null)
+    {
+        return $this->selectOne($statement, $args, PDO::FETCH_NUM);
     }
 
 
@@ -641,6 +623,10 @@ class APDO extends PDO
             {
                 $this->reset();
             }
+            else
+            {
+                $this->__construct();
+            }
             throw $e;
         }
     }
@@ -710,7 +696,7 @@ class APDO extends PDO
         $statement = "SELECT COUNT(*)\nFROM " . ($this->table ? : $this->lastTable)
             . (!empty($where) ? "\nWHERE " . $where : '');
 
-        list($count) = $this->selectFirstL($statement, $this->args ? : $this->lastArgs);
+        list($count) = $this->selectOneL($statement, $this->args ? : $this->lastArgs);
         $this->reset();
         return $count;
     }

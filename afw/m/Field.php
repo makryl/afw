@@ -192,6 +192,23 @@ class Field
     /**
      * @return Field
      */
+    function emptyskip()
+    {
+        return $this->addFilter(function($value)
+        {
+            if (empty($value))
+            {
+                throw new ModelFilterSkip();
+            }
+            return $value;
+        });
+    }
+
+
+
+    /**
+     * @return Field
+     */
     function httpUrl()
     {
         return $this->addFilter(function($value)
@@ -358,22 +375,22 @@ class Field
         }
 
         return $this->addFilter(function($value, $name, $values) use ($nameFilter, $error)
-                {
-                    if (!empty($values[$name . '-delete']))
-                    {
-                        return '';
-                    }
-                    if (empty($value['tmp_name']) || !file_exists($value['tmp_name']))
-                    {
-                        throw new ModelFilterSkip();
-                    }
-                    if (!preg_match('/^' . str_replace(['.', '*', ';'], ['\.', '.*', '|'], $nameFilter) . '$/i',
-                            $value['name']))
-                    {
-                        throw new \Exception($error);
-                    }
-                    return substr($value['name'], strrpos($value['name'], '.') + 1);
-                });
+        {
+            if (!empty($values[$name . '-delete']))
+            {
+                return '';
+            }
+            if (empty($value['tmp_name']) || !file_exists($value['tmp_name']))
+            {
+                throw new ModelFilterSkip();
+            }
+            if (!preg_match('/^' . str_replace(['.', '*', ';'], ['\.', '.*', '|'], $nameFilter) . '$/i',
+                    $value['name']))
+            {
+                throw new \Exception($error);
+            }
+            return substr($value['name'], strrpos($value['name'], '.') + 1);
+        });
     }
 
 
