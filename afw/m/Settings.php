@@ -32,7 +32,7 @@ class Settings extends ModelWithFields
             $this->data = $this->cache->get(self::cacheData);
         }
 
-        if (!isset($this->data))
+        if (empty($this->data))
         {
             $this->data = @unserialize(file_get_contents($file));
             $this->cache();

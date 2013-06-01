@@ -619,14 +619,7 @@ class APDO
         }
         catch (\Exception $e)
         {
-            if (isset($this))
-            {
-                $this->reset();
-            }
-            else
-            {
-                $this->__construct();
-            }
+            $this->reset();
             throw $e;
         }
     }
@@ -733,15 +726,12 @@ class APDO
         }
         catch (\Exception $e)
         {
-            if (isset($this))
-            {
-                $this->reset();
-            }
+            $this->reset();
             throw $e;
         }
 
         $this->reset();
-        return $this->lastInsertId();
+        return $this->pdo->lastInsertId();
     }
 
 
@@ -765,10 +755,7 @@ class APDO
         }
         catch (\Exception $e)
         {
-            if (isset($this))
-            {
-                $this->reset();
-            }
+            $this->reset();
             throw $e;
         }
 
@@ -789,10 +776,7 @@ class APDO
         }
         catch (\Exception $e)
         {
-            if (isset($this))
-            {
-                $this->reset();
-            }
+            $this->reset();
             throw $e;
         }
 
