@@ -17,9 +17,9 @@ $uri->setException(function($e)
         ->wrap(new afw\c\Layout());
 });
 
-$uri->addPattern('`^doc(/\w+)$`', function ($m)
+$uri->addPattern('`^doc/(en|ru)$`', function ($m)
 {
-    return new doc\c\Doc($m[0]);
+    return new afw\doc\c\Index('afw/' . $m[0] . '.txt');
 });
 
 
