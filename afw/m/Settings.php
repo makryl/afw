@@ -43,9 +43,8 @@ class Settings extends ModelWithFields
 
     function save(array $rawValues)
     {
-        $newValues = $this->filterValues($rawValues);
-        file_put_contents($this->file, serialize($newValues));
-        $this->data = $newValues;
+        $this->data = $this->filterValues($rawValues) + (array)$this->data;
+        file_put_contents($this->file, serialize($this->data));
         $this->cache();
     }
 

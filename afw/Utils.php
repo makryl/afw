@@ -215,13 +215,13 @@ class Utils
 
 
 
-    static function setLocale($locale, array $available)
+    static function setLocale($locale, array $available, $encoding = 'UTF-8')
     {
         if (!in_array($locale, $available))
         {
             $locale = \afw\Utils::bestlocale($available);
         }
-        $locale .= '.UTF-8';
+        $locale .= '.' . $encoding;
         setlocale(LC_ALL, $locale);
         putenv('LC_ALL=' . $locale);
         return $locale;

@@ -79,12 +79,12 @@ class APDO
      */
     function pdo()
     {
-        if (!isset($this->queryCount))
+        if (!isset($this->pdo))
         {
-            if (!isset($this->options[PDO::ATTR_ERRMODE]))
-            {
-                $this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-            }
+            $this->options = (array)$this->options + [
+                PDO::ATTR_ERRMODE           => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_EMULATE_PREPARES  => false,
+            ];
             $this->pdo = new PDO($this->dsn, $this->username, $this->password, $this->options);
             $this->queryCount = 0;
         }
@@ -95,7 +95,7 @@ class APDO
 
     function connected()
     {
-        return isset($this->queryCount);
+        return isset($this->pdo);
     }
 
 

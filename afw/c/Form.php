@@ -185,7 +185,10 @@ class Form extends Controller
                 $callback = $this->callback;
             }
             $callback();
-            $this->complete();
+            if (empty($this->exception) && empty($this->exceptions))
+            {
+                $this->complete();
+            }
         }
     }
 
