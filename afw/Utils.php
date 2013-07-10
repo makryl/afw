@@ -164,7 +164,7 @@ class Utils
 
 
 
-    static function bestlocale(array $available_locales, $http_accept_language = null)
+    static function bestLocale(array $available_locales, $http_accept_language = null)
     {
         if (!isset($http_accept_language))
         {
@@ -219,7 +219,7 @@ class Utils
     {
         if (!in_array($locale, $available))
         {
-            $locale = \afw\Utils::bestlocale($available);
+            $locale = \afw\Utils::bestLocale($available);
         }
         $locale .= '.' . $encoding;
         setlocale(LC_ALL, $locale);

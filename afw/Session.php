@@ -77,7 +77,6 @@ class Session
     {
         self::start();
         session_destroy();
-        self::commit();
     }
 
 }
