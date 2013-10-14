@@ -68,7 +68,7 @@ class Settings extends ModelWithFields
                 }
             }
             $s .= "    static \$$name = "
-                . str_replace("\n", "\n    ", var_export(@$values[$name], true))
+                . var_export(@$values[$name], true)
                 . ";\n\n";
         }
         $s .= "}\n";

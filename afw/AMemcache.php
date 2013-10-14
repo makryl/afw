@@ -24,10 +24,10 @@ class AMemcache extends \Memcache implements ICache
     protected $prefixInit;
     protected $ttl;
     protected $version;
+    protected $versionKey;
 
 
-
-    function __construct($host, $port = null, $timeout = null, $prefix = null, $ttl = null)
+    function __construct($host = 'localhost', $port = 11211, $timeout = null, $prefix = null, $ttl = null)
     {
         $this->host = $host;
         $this->port = $port;
@@ -43,15 +43,15 @@ class AMemcache extends \Memcache implements ICache
     {
         if (!isset($this->prefix))
         {
-            if (!$this->connect($this->host, $this->port, $this->timeout))
+            if (!parent::connect($this->host, $this->port, $this->timeout))
             {
                 throw new \Exception('Cannot connect to memcache server');
             }
 
-            $versionKey = $this->prefixInit . '.' . self::cacheVersion;
-            if (!parent::add($versionKey, $this->version))
+            $this->versionKey = $this->prefixInit . '.' . self::cacheVersion;
+            if (!parent::add($this->versionKey, $this->version))
             {
-                $this->version = parent::get($versionKey);
+                $this->version = parent::get($this->versionKey);
             }
 
             $this->prefix = $this->prefixInit . '.' . $this->version . '.';
@@ -63,7 +63,7 @@ class AMemcache extends \Memcache implements ICache
     function clear()
     {
         $this->connect();
-        $this->version = parent::inc(self::cacheVersion);
+        $this->version = parent::increment($this->versionKey);
         $this->prefix = $this->prefixInit . '.' . $this->version . '.';
     }
 
