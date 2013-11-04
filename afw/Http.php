@@ -7,7 +7,7 @@ namespace afw;
 class Http
 {
 
-    static function post($url, $data = [])
+    static function request($url, $data = [])
     {
         if (empty($data))
         {
@@ -30,21 +30,21 @@ class Http
 
     static function json_decode($url, $data = [])
     {
-        return json_decode(self::post($url, $data));
+        return json_decode(self::request($url, $data));
     }
 
 
 
     static function unserialize($url, $data = [])
     {
-        return unserialize(self::post($url, $data));
+        return unserialize(self::request($url, $data));
     }
 
 
 
     static function simplexml($url, $data = [])
     {
-        return simplexml_load_string(self::post($url, $data));
+        return simplexml_load_string(self::request($url, $data));
     }
 
 }

@@ -55,6 +55,7 @@ h1, h2, h3, h4, h5, h6
 {
     line-height: 1.1;
     margin-bottom: .2em;
+    page-break-after: avoid;
 }
 
 h1
@@ -241,6 +242,11 @@ th, td
     vertical-align: top;
     text-align: left;
     padding: 1ex;
+}
+
+table, td
+{
+    border: 1px solid;
 }
 
 label
