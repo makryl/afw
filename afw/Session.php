@@ -59,7 +59,7 @@ class Session
     static function get($name)
     {
         self::read();
-        return @$_SESSION[$name];
+        return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
     }
 
 

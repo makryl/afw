@@ -27,7 +27,7 @@ class AMemcache extends \Memcache implements ICache
     protected $versionKey;
 
 
-    function __construct($host = 'localhost', $port = 11211, $timeout = null, $prefix = null, $ttl = null)
+    function __construct($host = 'localhost', $port = 11211, $timeout = 1, $prefix = null, $ttl = null)
     {
         $this->host = $host;
         $this->port = $port;

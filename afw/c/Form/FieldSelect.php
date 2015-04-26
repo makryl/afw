@@ -33,6 +33,7 @@ class FieldSelect extends Field
     {
         if (isset($this->options) && is_callable($this->options))
         {
+            /** @var callable $options */
             $options = $this->options;
             $this->options = $options();
         }

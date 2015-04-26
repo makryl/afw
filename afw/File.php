@@ -218,9 +218,19 @@ class File
         foreach ($params as $p)
         {
             self::checkDir($p[self::DEST]);
-            if (!rename($src, $p[self::DEST]))
+            if (is_uploaded_file($src))
             {
-                throw new \Exception(self::$WRITE_ERR);
+                if (!move_uploaded_file($src, $p[self::DEST]))
+                {
+                    throw new \Exception(self::$WRITE_ERR);
+                }
+            }
+            else
+            {
+                if (!rename($src, $p[self::DEST]))
+                {
+                    throw new \Exception(self::$WRITE_ERR);
+                }
             }
             chmod($p[self::DEST], $mode ? : self::$CHMOD);
         }

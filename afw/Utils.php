@@ -46,7 +46,7 @@ class Utils
         }
         else
         {
-            mail($to, $subject, $message, "Content-Type: $mime; charset=$encoding", !empty($from) ? " -f $from" : '');
+            mail($to, $subject, $message, "From: $from\nContent-Type: $mime; charset=$encoding"/*, !empty($from) ? " -f $from" : ''*/);
         }
     }
 

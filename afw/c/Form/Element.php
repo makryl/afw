@@ -184,7 +184,7 @@ class Element extends Controller
 
 
     /**
-     * @return FieldImage
+     * @return FieldFile
      */
     static function image($label = null, $labelDelete = null, $maxFileSize = null, $name = null)
     {
